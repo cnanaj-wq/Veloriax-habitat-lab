@@ -1,0 +1,13 @@
+data/
+datasets/veloriax-demo-2023-2026.zip
+data-*/
+__pycache__/
+*.pyc
+.venv/
+.env
+*.log
+*.qvf
+*.qvd
+*.parquet
+*.db
+.DS_Store

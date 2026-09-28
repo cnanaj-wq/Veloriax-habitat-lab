@@ -1,0 +1,22 @@
+{
+  "archive_name": "veloriax-demo-2023-2026.zip",
+  "archive_size_bytes": 17059738,
+  "archive_sha256": "dbe2a558ac91b4bb18681947a435d319ea6b617a7f10a70f64372e380de30db4",
+  "parts": [
+    {
+      "file": "veloriax-demo-2023-2026.zip.part01",
+      "size_bytes": 6000000,
+      "sha256": "9e50e6730a9ddba5823a10eaa649a424a35154e7514fa2b81b343473dbb82d61"
+    },
+    {
+      "file": "veloriax-demo-2023-2026.zip.part02",
+      "size_bytes": 6000000,
+      "sha256": "967437644f1d3946b0b3a19644a8144964669b4f3d6540dd998f79b2e2b6755d"
+    },
+    {
+      "file": "veloriax-demo-2023-2026.zip.part03",
+      "size_bytes": 5059738,
+      "sha256": "8807daf63dcb335001a7ec8d12607c58d383392048681d00aa8cd0b4cc910d03"
+    }
+  ]
+}

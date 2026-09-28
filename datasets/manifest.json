@@ -1,0 +1,114 @@
+{
+  "synthetic": true,
+  "seed": 28092026,
+  "certified_release_id": "REL_20260927_2312",
+  "period": [
+    "2023-01-01",
+    "2026-12-31"
+  ],
+  "time_zone_events": "Europe/Paris",
+  "files": {
+    "dim_bail.csv": {
+      "rows": 41340,
+      "sha256": "d0ce8f764cffe4c03beb82ffec3b9ee4b486b6b6fea7d1af58364fd5740b76e8"
+    },
+    "dim_cautionnement.csv": {
+      "rows": 1500,
+      "sha256": "4636440b1ecda0ebfa06705af75165ea910aeaf0b76da4c9aedc11c1d3c443f3"
+    },
+    "dim_contrat_assurance.csv": {
+      "rows": 65628,
+      "sha256": "808317b09e07aeb6eb106e22082f0b39b00f0f361d8d859d77151b2e552f2eb4"
+    },
+    "dim_entreprise.csv": {
+      "rows": 1,
+      "sha256": "ddbd95b054522781fba2ecb716f31eaa14baeaa9f5b031bec4015a7b960160ae"
+    },
+    "dim_garantie.csv": {
+      "rows": 22,
+      "sha256": "5bd7b3b3e9a32301b436f86808033e94447cc3e93c4c661c81cc3219a9c585b3"
+    },
+    "dim_garantie_financiere.csv": {
+      "rows": 128,
+      "sha256": "a697a8d1f62cb32ac8799a7d1f2423d406fcf4ae3919f5291b42b3ce0a6722d0"
+    },
+    "dim_lot.csv": {
+      "rows": 56000,
+      "sha256": "cfb2eb5cc9a4a5161af69729a86523b39fb55a1b90a4b0748efbbea60d5f072f"
+    },
+    "dim_mandat.csv": {
+      "rows": 160,
+      "sha256": "136e973c28427423bbd19bc3e0bb45f15a4d6430307b169db20810c49b491f6c"
+    },
+    "dim_objectif_historise.csv": {
+      "rows": 10240,
+      "sha256": "a99cfcb9a4600ef5dff16bb10d8e3f886733b8c59308541408a156b7c02ce584"
+    },
+    "dim_produit_assurance.csv": {
+      "rows": 12,
+      "sha256": "5b76203bca1ef743f95d6591b206402de912a8bbfc1bcb5a288605a9a4b9dcbe"
+    },
+    "dim_professionnel.csv": {
+      "rows": 32,
+      "sha256": "1a1b64009b4ddada712a066a67dcde74cdf7daccc804a5d41bf527ea0c78355f"
+    },
+    "dim_programme.csv": {
+      "rows": 160,
+      "sha256": "ad1d96d9425950461c71d2ccb7afc7a064f197c7791d5ee9a51f642b75d8a345"
+    },
+    "fact_dpe.csv": {
+      "rows": 6000,
+      "sha256": "477cd1d86b2ded2a7e62969d621f85b38ca584d944dcab781a227cfae23fe70e"
+    },
+    "fact_encaissement.csv": {
+      "rows": 288000,
+      "sha256": "3086bda6ee29eb14b50b37888816e147b8b8f14dfff9fbc5bd12f3dbfc8c2855"
+    },
+    "fact_mouvement_fonds.csv": {
+      "rows": 15360,
+      "sha256": "56f085355afac92d05b26d074edd031f5f7444de75488f0f4a2e688cc654ad99"
+    },
+    "fact_mouvement_sinistre.csv": {
+      "rows": 1306,
+      "sha256": "ab5f8ced2a51da7a0131d15bb4ddd3731a94da945a817d5b7f6ad2bdc39f2077"
+    },
+    "fact_occupation_mensuelle.csv": {
+      "rows": 288000,
+      "sha256": "80be61413f420c9a499e4b55037486b8f645821d8d0ec17c0f3becc24f0072f3"
+    },
+    "fact_prime_trimestrielle.csv": {
+      "rows": 258912,
+      "sha256": "7c0eb2f77a39997a4f025f976a960c2026e778deddf482f4ae07c6acaafe5d60"
+    },
+    "fact_quittancement.csv": {
+      "rows": 864000,
+      "sha256": "a29a1b60ee93810283f87c3b5cc4bf36384faa122f8d0caff79c5f826b68068b"
+    },
+    "fact_sinistre.csv": {
+      "rows": 707,
+      "sha256": "34167da45047167e447b2a67db8d9195c4dca279c5d2d76950207a5fe4e45122"
+    },
+    "fact_travaux.csv": {
+      "rows": 2000,
+      "sha256": "aedfebdc6a4a3f17eca3a74060684b8b01ba0d2691ab104b32557794ce405d25"
+    },
+    "fact_valorisation.csv": {
+      "rows": 160,
+      "sha256": "72368f500281203c29beb7e51a1e1c5b7c2d89166ceadbe1f6a5a73c93d60504"
+    },
+    "fact_ventes.csv": {
+      "rows": 60000,
+      "sha256": "3fdd47ccbe3512b9b967de5a6f62f2b149b4f9112a35808cebee127fe233b2fe"
+    },
+    "ops_incident_scenario.csv": {
+      "rows": 10,
+      "sha256": "cfa0f77c02dadc888ee2120efcd1714d3301f06dbeac596e462e523da47fdc27"
+    },
+    "pont_contrat_garantie.csv": {
+      "rows": 259668,
+      "sha256": "eea0068ee976e1ecd997f658ec34d032699255a6966c5a231c00bc583a715433"
+    }
+  },
+  "total_rows": 2219346,
+  "model_version": "2-immo-assurance"
+}
