@@ -32,6 +32,65 @@ python scripts/validate_dataset.py data
 
 The original CSVs are kept inside the segmented archive tracked by Git. The extracted `data/` directory is ignored.
 
+## Target architecture
+
+```mermaid
+flowchart TB
+    A["CSV + manifest"] --> B["GCP Cloud Storage"]
+    B --> C["BigQuery : raw / staging / mart"]
+    C --> D["Qlik : reporting"]
+    C --> E["Snowflake : scoped comparison"]
+    B --> F["Ops Navigator : events + lineage"]
+    C --> F
+    D --> F
+    E --> F
+    F --> G["Gemini : evidence-based diagnosis"]
+```
+
+This is an **architecture to implement**. Google AI Studio will help prototype the Ops Navigator UI; collectors, cloud connections, and Qlik applications have not been deployed. [Detailed architecture and multi-node Qlik target](docs/architecture.md) (French).
+
+## Releasing a trustworthy figure
+
+```mermaid
+flowchart TB
+    A["Sales + dimension sources"] --> B["Load DWH raw / staging"]
+    B --> C["Business + technical checks"]
+    C -->|Passed and approved| D["Coherent certified release N+1"]
+    C -->|Failed| E["Keep certified release N"]
+    D --> F["Qlik : published release"]
+    E --> F
+    C --> G["Ops Navigator : incident + lineage"]
+    F --> G
+```
+
+If N+1 fails, Qlik still displays N **with its date and a freshness warning**. Recovery requires reconciliation, human approval, and post-reload verification.
+
+## Data model
+
+```mermaid
+erDiagram
+    dim_programme ||--o{ dim_lot : contains
+    dim_programme ||--o{ dim_objectif_historise : targets
+    dim_lot ||--o{ fact_ventes : sells
+    dim_lot ||--o{ dim_bail : leases
+    dim_lot ||--o{ fact_quittancement : invoices
+    dim_lot ||--o{ fact_encaissement : collects
+    dim_lot ||--o{ fact_occupation_mensuelle : occupies
+```
+
+```mermaid
+erDiagram
+    dim_lot o|--o{ dim_contrat_assurance : covers
+    dim_produit_assurance ||--o{ dim_contrat_assurance : classifies
+    dim_contrat_assurance ||--o{ pont_contrat_garantie : includes
+    dim_garantie ||--o{ pont_contrat_garantie : identifies
+    dim_contrat_assurance ||--o{ fact_prime_trimestrielle : bills
+    dim_contrat_assurance ||--o{ fact_sinistre : concerns
+    fact_sinistre ||--o{ fact_mouvement_sinistre : evolves
+```
+
+Facts have different grains. Aggregate invoices, receipts, premiums, and claim movements appropriately before joining amounts. [Full 25-table dictionary and join rules](docs/modele.md) (French).
+
 ## Lab roadmap
 
 | Tool | Purpose | Status |

@@ -33,6 +33,65 @@ python scripts/validate_dataset.py data
 
 Le volume se règle avec `--rental-lots`, `--sale-lots` et les plafonds des deux scripts. Les trois segments de l'archive restent suivis par Git ; le dossier `data/` est ignoré. Le manifeste versionne le contenu, pas une mesure de performance.
 
+## Architecture cible
+
+```mermaid
+flowchart TB
+    A["CSV + manifeste"] --> B["GCP Cloud Storage"]
+    B --> C["BigQuery : raw / staging / mart"]
+    C --> D["Qlik : reporting"]
+    C --> E["Snowflake : comparaison ciblée"]
+    B --> F["Ops Navigator : événements + lineage"]
+    C --> F
+    D --> F
+    E --> F
+    F --> G["Gemini : diagnostic avec preuves"]
+```
+
+Cette chaîne est **une architecture à implémenter**. Google AI Studio servira à prototyper l'IHM d'Ops Navigator ; les collecteurs, connexions cloud et applications Qlik ne sont pas encore déployés. [Détail des rôles et de Qlik multi-nœud](docs/architecture.md).
+
+## Publication d'un chiffre fiable
+
+```mermaid
+flowchart TB
+    A["Sources : ventes et dimensions"] --> B["Chargement raw / staging DWH"]
+    B --> C["Contrôles métier et techniques"]
+    C -->|Validés et approuvés| D["Version cohérente certifiée N+1"]
+    C -->|Échec| E["Version certifiée N conservée"]
+    D --> F["Qlik : version publiée"]
+    E --> F
+    C --> G["Ops Navigator : incident et lineage"]
+    F --> G
+```
+
+Quand N+1 échoue, Qlik affiche toujours N **avec sa date et une alerte de fraîcheur**. La reprise demande réconciliation, validation humaine et contrôle après reload.
+
+## Modèle de données
+
+```mermaid
+erDiagram
+    dim_programme ||--o{ dim_lot : regroupe
+    dim_programme ||--o{ dim_objectif_historise : cible
+    dim_lot ||--o{ fact_ventes : transaction
+    dim_lot ||--o{ dim_bail : loue
+    dim_lot ||--o{ fact_quittancement : facture
+    dim_lot ||--o{ fact_encaissement : encaisse
+    dim_lot ||--o{ fact_occupation_mensuelle : occupe
+```
+
+```mermaid
+erDiagram
+    dim_lot o|--o{ dim_contrat_assurance : couvre
+    dim_produit_assurance ||--o{ dim_contrat_assurance : qualifie
+    dim_contrat_assurance ||--o{ pont_contrat_garantie : comporte
+    dim_garantie ||--o{ pont_contrat_garantie : reference
+    dim_contrat_assurance ||--o{ fact_prime_trimestrielle : genere
+    dim_contrat_assurance ||--o{ fact_sinistre : concerne
+    fact_sinistre ||--o{ fact_mouvement_sinistre : evolue
+```
+
+Les faits ont des grains différents : ne pas joindre directement les montants de quittancement, encaissement, primes et sinistres sans agrégation adaptée. [Dictionnaire complet des 25 tables et règles de jointure](docs/modele.md).
+
 ## Parcours du lab
 
 | Outil | Objectif | État |
