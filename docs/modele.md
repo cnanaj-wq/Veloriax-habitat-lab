@@ -2,19 +2,38 @@
 
 25 fichiers CSV, avec en-tête UTF-8 et séparateur virgule. Chaque ligne du tableau correspond à un fichier livré ; les colonnes sont données dans leur ordre réel. Les cardinalités sont celles de la version archivée, et non des volumes de production.
 
-## Relations et grains
+## Vue relationnelle : ventes, location et objectifs
 
 ```mermaid
-flowchart TB
-    P["Programme"] --> L["Lot"]
-    L --> B["Bail et occupation"]
-    L --> V["Ventes et loyers"]
-    L --> C["Contrat"]
-    C --> G["Garanties et primes"]
-    C --> S["Sinistres et mouvements"]
+erDiagram
+    dim_programme ||--o{ dim_lot : regroupe
+    dim_programme ||--o{ dim_objectif_historise : cible
+    dim_lot ||--o{ fact_ventes : transaction
+    dim_lot ||--o{ dim_bail : loue
+    dim_lot ||--o{ fact_quittancement : facture
+    dim_lot ||--o{ fact_encaissement : encaisse
+    dim_lot ||--o{ fact_occupation_mensuelle : occupe
+    dim_bail ||--o{ fact_occupation_mensuelle : justifie
+    dim_bail ||--o{ dim_cautionnement : garantit
 ```
 
-Le programme possède des lots. Un lot peut avoir plusieurs baux, transactions, diagnostics et contrats au fil du temps. Un contrat porte plusieurs garanties ; `pont_contrat_garantie` est une table de liaison temporelle. Les objectifs portent sur le programme, un KPI et un trimestre avec deux versions de connaissance. Les événements d’incident sont séparés des faits métier.
+`fact_ventes` a pour grain l'événement commercial signé ; `fact_quittancement` est à la ligne de type par lot-mois ; `fact_encaissement` et `fact_occupation_mensuelle` sont au lot-mois. L'objectif est historisé par programme, KPI et trimestre : la révision valable à la date de connaissance doit être sélectionnée avant tout calcul.
+
+## Vue relationnelle : contrats, garanties et sinistres
+
+```mermaid
+erDiagram
+    dim_lot o|--o{ dim_contrat_assurance : couvre
+    dim_produit_assurance ||--o{ dim_contrat_assurance : qualifie
+    dim_contrat_assurance ||--o{ pont_contrat_garantie : comporte
+    dim_garantie ||--o{ pont_contrat_garantie : reference
+    dim_contrat_assurance ||--o{ fact_prime_trimestrielle : genere
+    dim_contrat_assurance ||--o{ fact_sinistre : concerne
+    dim_garantie ||--o{ fact_sinistre : declare
+    fact_sinistre ||--o{ fact_mouvement_sinistre : evolue
+```
+
+Le programme possède des lots. Un lot peut avoir plusieurs baux, transactions, diagnostics et contrats au fil du temps. Un contrat porte plusieurs garanties ; `pont_contrat_garantie` est une table de liaison temporelle. Certains contrats couvrent directement un programme ou un professionnel et n'ont pas de `lot_id` : conserver ces liens optionnels dans le modèle physique. Les événements d’incident sont séparés des faits métier.
 
 | Table | Grain | Lignes | Colonnes |
 | --- | --- | ---: | --- |

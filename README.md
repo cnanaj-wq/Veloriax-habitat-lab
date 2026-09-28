@@ -1,4 +1,8 @@
-# Veloriax Habitat Lab
+<p align="right">
+  <strong>FR</strong> | <a href="README.en.md">EN</a>
+</p>
+
+<h1>Veloriax Habitat Lab <img src="assets/veloriax-habitat-mark.png" alt="Veloriax Habitat" width="76" align="right"></h1>
 
 **Veloriax Habitat est une société entièrement fictive.** Ce dépôt fournit un socle de données immobilières et d'assurance pour construire une chaîne BI observable. Il répond à une question métier : *quel chiffre présenter au comité quand une source, une table ou un rechargement devient douteux ?*
 
@@ -8,6 +12,8 @@
 - [Deux générateurs Python](src/) déterministes, sans dépendances externes.
 - [Modèle et dictionnaire](docs/modele.md), [KPI et contrôles](docs/indicateurs.md), [architecture](docs/architecture.md), [scénarios Ops Navigator](docs/operations.md) et [chargement](docs/import.md).
 - [Expérience Ops Navigator](docs/experience-ops-navigator.md), [contrat d'événements et scénario démo](apps/ops-navigator/README.md), [prompt Google AI Studio](prompts/google-ai-studio/01-ops-navigator.md) et [prompt d'itération](prompts/google-ai-studio/02-incident-room.md).
+
+Les [schémas d'architecture et de publication](docs/architecture.md#architecture-technique-cible) ainsi que les [deux vues du modèle de données](docs/modele.md#vue-relationnelle--ventes-location-et-objectifs) sont rendus directement par GitHub.
 
 Les données, les noms de lots, les montants et les sinistres sont fictifs. Aucune donnée du support de référence ni d'un assureur réel n'a été reprise. Les ratios générés ne représentent aucun marché.
 

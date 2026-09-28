@@ -1,23 +1,42 @@
 # Architecture et rôle des outils
 
-## Chaîne visée
+## Architecture technique cible
 
 ```mermaid
 flowchart TB
-    A["Fichiers sources fictifs"] --> B["Cloud Storage : lots immuables"]
-    B --> C["BigQuery : raw, staging, mart"]
-    C --> D["Qlik : application métier"]
-    C --> E["Snowflake : comparaison ciblée"]
-    B --> F["Ops Navigator"]
-    C --> F
-    D --> F
-    E --> F
-    F --> G["Agent IA : diagnostic avec preuves"]
+    A["CSV synthétiques + manifeste"] --> B["Cloud Storage : lot horodaté"]
+    B --> C["BigQuery : raw"]
+    C --> D["BigQuery : staging + contrôles"]
+    D --> E["Mart versionné : candidat / certifié"]
+    E --> F["Qlik : reporting et investigation"]
+    D --> H["Snowflake : comparaison ciblée"]
+    B --> I["Ops Navigator : traces et lineage"]
+    D --> I
+    E --> I
+    F --> I
+    H --> I
+    I --> J["Gemini : diagnostic étayé"]
 ```
 
 Google AI Studio sert d'atelier de création de l'IHM **Ops Navigator** à partir des prompts versionnés dans ce dépôt. Le code généré doit être revu, testé et suivi par Git. L'application lit un contrat d'événements ; elle ne remplace ni Cloud Logging, ni les métadonnées BigQuery/Snowflake, ni les journaux Qlik. Une démo sur événements fictifs précède les adaptateurs authentifiés.
 
 Le dépôt livre les fichiers et générateurs. Les flèches ci-dessus décrivent le **travail à implémenter**, pas des connexions déjà opérationnelles.
+
+## Décision de publication et continuité du reporting
+
+```mermaid
+flowchart TB
+    A["Sources : ventes + dimensions"] --> B["Chargement raw / staging DWH"]
+    B --> C["Contrôles techniques et métier"]
+    C -->|Validés et approuvés| D["Version cohérente certifiée N+1"]
+    C -->|Échec ou données absentes| E["Version certifiée N conservée"]
+    D --> F["Qlik : version publiée"]
+    E --> F
+    C --> G["Ops Navigator : incident + lineage"]
+    F --> G
+```
+
+**Contrôles bloquants :** intégrité du lot, volumes, clés, références, réconciliation ventes/dimensions, calcul du CA et date de fraîcheur. La version N est un jeu cohérent de faits et dimensions, avec une preuve d'intégrité et un `release_id` ; elle n'est pas un simple cache de graphique. Si la version N+1 échoue, Qlik conserve N et affiche **« données arrêtées au … »** avec alerte de fraîcheur. Après restauration de la source, rejouer le candidat, contrôler les écarts, demander validation humaine, puis charger Qlik et vérifier le KPI avant clôture de l'incident. Ops Navigator enregistre chaque transition et son auteur.
 
 | Couche | Entrée | Sortie | Trace exigée |
 | --- | --- | --- | --- |
@@ -40,6 +59,18 @@ Les états alternatifs Qlik isolent les **sélections**. Ils ne sauvegardent ni 
 ## Qlik Enterprise : cible documentaire
 
 Sur GCP Compute Engine : nœud central avec QMC et repository, nœud de rechargement, nœud de consultation, stockage/référentiel résilients et réseau privé. Les responsabilités des nœuds et le basculement demandent un déploiement Enterprise distinct. Pour ce lab personnel, Qlik Sense Desktop sur le poste Windows est le périmètre exécutable prévu.
+
+```mermaid
+flowchart TB
+    U["Utilisateurs"] --> P["Proxy / Engine : consultation"]
+    M["Nœud central : QMC / Repository"] --> P
+    M --> R["Nœud Scheduler / Engine : reload"]
+    B["BigQuery : mart publié"] --> R
+    R --> S["Stockage partagé résilient"]
+    P --> S
+```
+
+Ce schéma représente les **rôles logiques**, pas un cluster déjà installé. Le réseau, les identités, le référentiel PostgreSQL, le stockage partagé, les zones et le basculement central nécessitent un design et des tests dédiés ; la QMC appartient à l'environnement Qlik Enterprise hébergé sur GCP dans cette variante. Avec Qlik Sense Desktop, il n'y a pas de QMC multi-nœud.
 
 ## Sécurité et coûts à vérifier pendant l'implémentation
 
