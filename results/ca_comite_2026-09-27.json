@@ -1,0 +1,46 @@
+{
+  "synthetic": true,
+  "kpi_code": "RESERVATIONS_NETTES_YTD",
+  "label": "Réservations nettes 2026 à date",
+  "grain": "événement commercial signé",
+  "period_start": "2026-01-01",
+  "as_of_inclusive": "2026-09-27",
+  "release_id": "REL_20260927_2312",
+  "unit": "centimes EUR",
+  "source_rows": 60000,
+  "future_rows_excluded": 4043,
+  "rows_until_as_of": 55957,
+  "rows_ytd": 11083,
+  "reservation_count": 10159,
+  "cancellation_count": 924,
+  "gross_reservations_centimes": 391070210144,
+  "cancellations_centimes": -35535583860,
+  "net_centimes": 355534626284,
+  "by_month_centimes": {
+    "2026-01": 40894453200,
+    "2026-02": 36696492195,
+    "2026-03": 41045834100,
+    "2026-04": 39366905938,
+    "2026-05": 40855608890,
+    "2026-06": 39706333349,
+    "2026-07": 40616661738,
+    "2026-08": 40871815217,
+    "2026-09": 35480521657
+  },
+  "by_region_centimes": {
+    "ARA": 44441193293,
+    "BRE": 44564171968,
+    "HDF": 44440838556,
+    "IDF": 44373895911,
+    "NAQ": 44540804396,
+    "OCC": 44463690573,
+    "PACA": 44327352842,
+    "PDL": 44382678745
+  },
+  "controls": {
+    "references": "PASS",
+    "signs": "PASS",
+    "source_month": "PASS",
+    "reconciliation": "PASS"
+  }
+}

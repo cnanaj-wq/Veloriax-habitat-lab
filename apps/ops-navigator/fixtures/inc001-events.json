@@ -6,10 +6,13 @@
     "kpi_id": "CA_COMITE",
     "release_id": "REL_20260927_2312",
     "as_of": "2026-09-27T23:12:00+02:00",
-    "value_centimes": 12480000000,
+    "value_centimes": 355534626284,
     "freshness_limit_minutes": 480,
     "unit": "EUR",
-    "synthetic": true
+    "synthetic": true,
+    "kpi_definition": "RESERVATIONS_NETTES_YTD",
+    "period_start": "2026-01-01",
+    "source_result": "results/ca_comite_2026-09-27.json"
   },
   "events": [
     {

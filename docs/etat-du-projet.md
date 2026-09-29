@@ -7,6 +7,7 @@
 - Scénarios d'erreur définis séparément des données certifiées.
 - Documentation de la chaîne cible, des KPI et des chargements.
 - Cahier d'expérience, prompts Google AI Studio et événements de démonstration d'Ops Navigator.
+- Premier contrat de KPI et référence locale des réservations nettes YTD au 27/09/2026, avec contrôles et résultat versionné.
 
 ## Non encore réalisé
 
@@ -18,7 +19,7 @@
 
 ## Incréments proposés
 
-1. **Décision métier** : vérifier CA net, loyer, occupation, prime et charge des sinistres sur le socle local.
+1. **Décision métier** : réservations nettes YTD établies localement ; vérifier ensuite loyer, occupation, primes et charge des sinistres.
 2. **DWH** : charger les lots en BigQuery ; comparer un périmètre identique dans Snowflake ; consigner coûts et délais mesurés.
 3. **Qlik** : publier le reporting certifié et une feuille d'investigation à états alternatifs.
 4. **Incidents** : injecter une table absente puis une dimension incohérente, bloquer le candidat, observer le dernier KPI valide.

@@ -4,7 +4,7 @@ Un montant portant le suffixe `_centimes` doit être divisé par 100 à l'affich
 
 | KPI | Calcul au grain indiqué | Attention |
 | --- | --- | --- |
-| CA net de réservation | somme des `montant_centimes` signés dans `fact_ventes` | réservations, annulations et nouvelles réservations ; ce n'est pas l'encaissement |
+| Réservations nettes YTD (`CA_COMITE` dans la démo) | somme des `montant_centimes` signés dans `fact_ventes`, du 1er janvier à la date d'arrêté incluse | réservations, annulations et nouvelles réservations ; ni chiffre d'affaires comptable ni encaissement. [Référence locale](phase1-ca-comite.md) |
 | Loyer quittancé | somme `montant_centimes - franchise_centimes` des lignes `LOYER` | charges et taxes à présenter séparément |
 | Encaissement locatif | somme `fact_encaissement.montant_centimes` | ne pas confondre avec la quittance |
 | Impayés du lot-mois | quittance due moins montant encaissé, borné selon règle validée | le paiement généré comprend plusieurs types de lignes ; rapprocher au même périmètre |

@@ -12,6 +12,7 @@
 - [Deterministic Python generators](src/) and [integrity and relationship checks](scripts/validate_dataset.py).
 - [Architecture and certified-release decision flow](docs/architecture.md), [data model and all table columns](docs/modele.md), [KPIs and quality rules](docs/indicateurs.md), [Ops Navigator incident scenario](docs/operations.md), and [loading guidance](docs/import.md). Detailed documentation is currently in French.
 - [Ops Navigator experience specification](docs/experience-ops-navigator.md), [demo event contract](apps/ops-navigator/README.md), and [Google AI Studio build and refinement prompts](prompts/google-ai-studio/01-ops-navigator.md). These specifications and prompts are currently in French.
+- [Phase 1: committee KPI definition and reproducible local baseline](docs/phase1-ca-comite.md), with the [JSON result](results/ca_comite_2026-09-27.json). The detailed note is in French.
 
 The data, company, amounts, incidents, and ratios are fictional. They do not represent market observations or a real insurer.
 

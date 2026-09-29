@@ -12,6 +12,7 @@
 - [Deux générateurs Python](src/) déterministes, sans dépendances externes.
 - [Modèle et dictionnaire](docs/modele.md), [KPI et contrôles](docs/indicateurs.md), [architecture](docs/architecture.md), [scénarios Ops Navigator](docs/operations.md) et [chargement](docs/import.md).
 - [Expérience Ops Navigator](docs/experience-ops-navigator.md), [contrat d'événements et scénario démo](apps/ops-navigator/README.md), [prompt Google AI Studio](prompts/google-ai-studio/01-ops-navigator.md) et [prompt d'itération](prompts/google-ai-studio/02-incident-room.md).
+- [Phase 1 : contrat du KPI « CA comité » et référence locale reproductible](docs/phase1-ca-comite.md), avec [résultat JSON](results/ca_comite_2026-09-27.json).
 
 Les [schémas d'architecture et de publication](docs/architecture.md#architecture-technique-cible) ainsi que les [deux vues du modèle de données](docs/modele.md#vue-relationnelle--ventes-location-et-objectifs) sont rendus directement par GitHub.
 
