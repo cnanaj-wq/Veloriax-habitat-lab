@@ -1,0 +1,7 @@
+[
+  {"name": "programme_id", "type": "STRING"},
+  {"name": "region_code", "type": "STRING"},
+  {"name": "segment", "type": "STRING"},
+  {"name": "statut", "type": "STRING"},
+  {"name": "annee_livraison", "type": "STRING"}
+]

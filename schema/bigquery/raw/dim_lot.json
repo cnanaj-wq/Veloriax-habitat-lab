@@ -1,0 +1,8 @@
+[
+  {"name": "lot_id", "type": "STRING"},
+  {"name": "programme_id", "type": "STRING"},
+  {"name": "mode_commercialisation", "type": "STRING"},
+  {"name": "surface_m2", "type": "STRING"},
+  {"name": "pieces", "type": "STRING"},
+  {"name": "type_lot", "type": "STRING"}
+]

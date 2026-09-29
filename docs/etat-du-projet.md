@@ -8,6 +8,7 @@
 - Documentation de la chaîne cible, des KPI et des chargements.
 - Cahier d'expérience, prompts Google AI Studio et événements de démonstration d'Ops Navigator.
 - Premier contrat de KPI et référence locale des réservations nettes YTD au 27/09/2026, avec contrôles et résultat versionné.
+- Gabarit SQL BigQuery, schémas raw et contrôleur de réconciliation prêts pour le pilote ; exécution cloud en attente du projet et de la région.
 
 ## Non encore réalisé
 

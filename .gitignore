@@ -1,4 +1,5 @@
 data/
+build/
 datasets/veloriax-demo-2023-2026.zip
 data-*/
 __pycache__/

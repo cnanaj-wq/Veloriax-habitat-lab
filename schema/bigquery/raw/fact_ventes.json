@@ -1,0 +1,9 @@
+[
+  {"name": "evenement_id", "type": "STRING"},
+  {"name": "lot_id", "type": "STRING"},
+  {"name": "date_evenement", "type": "STRING"},
+  {"name": "type_evenement", "type": "STRING"},
+  {"name": "montant_centimes", "type": "STRING"},
+  {"name": "source_lot", "type": "STRING"},
+  {"name": "release_id", "type": "STRING"}
+]

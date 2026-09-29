@@ -2,18 +2,13 @@
 
 ## Fichiers et ordre
 
-Décompresser `datasets/veloriax-demo-2023-2026.zip` dans `data/`. Vérifier `python scripts/validate_dataset.py data`. Charger les dimensions (`dim_*`), le pont contrat-garantie, puis les faits (`fact_*`) et le catalogue `ops_*`. Le manifeste contient le nombre de lignes attendu et SHA-256 de chaque CSV.
+Reconstruire et décompresser l'archive segmentée avec `python scripts/unpack_dataset.py data`, puis vérifier `python scripts/validate_dataset.py data`. Charger les dimensions (`dim_*`), le pont contrat-garantie, puis les faits (`fact_*`) et le catalogue `ops_*`. Le manifeste contient le nombre de lignes attendu et SHA-256 de chaque CSV.
 
 Encodage UTF-8, séparateur virgule, première ligne d'en-têtes, dates ISO `YYYY-MM-DD`, valeurs vides pour certaines fins de validité. Les montants sont des **centimes entiers**. Faire les conversions en staging et tracer les rejets ; ne pas corriger directement les CSV certifiés.
 
 ## BigQuery (à exécuter avec votre projet)
 
-Créer un dataset `raw` dans la même région que le bucket Cloud Storage et copier les CSV décompressés dans le bucket. Exemple pour une table, à adapter :
-
-```bash
-bq --location=EU load --source_format=CSV --skip_leading_rows=1 --autodetect \
-  MON_PROJET:raw.fact_ventes gs://MON_BUCKET/veloriax/fact_ventes.csv
-```
+Le [runbook de la phase 2](phase2-bigquery.md) donne les schémas explicites des trois tables du premier KPI, le chargement pilote, une requête paramétrée et le contrôle de réconciliation. Il fixe la région et évite l'autodétection des colonnes CSV.
 
 Pour une vraie reprise, fixer les schémas de staging plutôt que de dépendre de l'inférence CSV. Charger dans de nouvelles tables candidates, comparer aux comptes du manifeste, puis promouvoir. Ne pas rendre le mart visible avant validation. Mesurer octets traités, durée et coûts des requêtes avec l'historique des jobs.
 
